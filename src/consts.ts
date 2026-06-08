@@ -1,13 +1,13 @@
 // =============================================================
 //  CONFIGURATION DU SITE
-//  C'est le SEUL fichier a modifier pour ton identite, tes
-//  liens et tes certifications. Pas besoin de toucher au reste.
+//  C'est le SEUL fichier à modifier pour mon identite, les
+//  liens et les certifications. Pas besoin de toucher au reste.
 // =============================================================
 
 export const SITE = {
   // Affiche dans l'onglet du navigateur et le pied de page
   title: 'Mehdi Kadri (Paoza)',
-  description: 'Portfolio cybersecurite : analyste SOC & pentester, profil dual offensif / defensif.',
+  description: 'Portfolio cybersecurite : analyste SOC & pentester',
 };
 
 export const IDENTITE = {
@@ -16,15 +16,13 @@ export const IDENTITE = {
   pseudo: 'Paoza',
   // Titre affiche sous le nom dans le hero
   titre: 'Analyste SOC & Pentester',
-  // Sous-titre / accroche du profil dual
-  sousTitre: 'profil dual offensif / defensif',
-  // Le pitch : ton paragraphe de presentation.
+  // Le pitch : mon paragraphe de presentation.
   // Tu peux le modifier librement ici.
-  pitch: `Ancien developpeur gameplay dans le jeu video, je me suis reconverti vers la cybersecurite, un domaine qui m'a toujours attire. Je me forme aujourd'hui sur la detection, l'investigation numerique et la simulation de tests d'intrusion. Mon objectif est de construire une approche Blue Team et Red Team complementaire, pour mieux comprendre et anticiper les menaces reelles. Je vise un premier poste d'analyste SOC, ou cette double perspective offensive et defensive fait la difference au quotidien.`,
+  pitch: `Ancien développeur gameplay, je me suis reconverti vers la cybersécurité, domaine qui m'a toujours attiré. Je me forme aujourd'hui sur la détection, l'investigation numérique et la simulation de tests d'intrusion. Mon objectif est de construire une approche Blue Team et Red Team complémentaire, pour mieux comprendre et anticiper les menaces réelles. Je vise un premier poste d'analyste SOC ou administrateur système, où mon approche offensive et défensive peut faire la différence au quotidien.`,
 };
 
-// Les liens du hero. Mets a jour les URL si besoin.
-// Pour cacher un lien, mets-le en commentaire ou supprime la ligne.
+// Les liens du hero. Mettre à jour les URL si besoin.
+// Pour cacher un lien, mettre en commentaire ou supprimer la ligne.
 export const LIENS = {
   github: 'https://github.com/paoza33',
   linkedin: 'https://www.linkedin.com/in/mehdikadri/',
@@ -39,7 +37,7 @@ export const LIENS = {
 // Lien vers le depot GitHub qui contient tes 150+ requetes SPL
 export const SPL_REPO = 'https://github.com/paoza33/Cyber';
 
-// Tes certifications.
+// Mes certifications.
 // statut : 'obtenu' | 'en-cours' | 'planifie'
 export const CERTIFS = [
   {
@@ -56,11 +54,11 @@ export const CERTIFS = [
   {
     sigle: 'CDSA',
     nom: 'Certified Defensive Security Analyst (HTB)',
-    statut: 'planifie',
+    statut: 'planifié',
   },
   {
     sigle: 'CPTS',
     nom: 'Certified Penetration Testing Specialist (HTB)',
-    statut: 'planifie',
+    statut: 'planifié',
   },
 ];
