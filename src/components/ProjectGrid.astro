@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+
+const projets = (await getCollection('projets', ({ data }) => !data.draft)).sort(
+  (a, b) => (b.data.updated ?? b.data.date).getTime() - (a.data.updated ?? a.data.date).getTime()
+);
+---
+
+<section class="section" id="projets" data-zone="projets">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="kicker">// projets</p>
+      <h2>Realisations</h2>
+      <p class="section-sub muted">
+        Une selection de travaux defensifs et offensifs. La bascule met en avant un cote ; l'autre reste visible, en retrait.
+      </p>
+    </div>
+
+    <div class="grid">
+      {projets.map((p) => (
+        <ProjectCard
+          title={p.data.title}
+          summary={p.data.summary}
+          side={p.data.side}
+          tags={p.data.tags}
+          date={p.data.date}
+          updated={p.data.updated}
+          external={!!p.data.externalUrl}
+          href={p.data.externalUrl ?? `/projets/${p.slug}/`}
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section { padding: 30px 0; }
+  .section-head { margin-bottom: 26px; }
+  .section-head h2 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); margin-top: 8px; }
+  .section-sub { margin-top: 10px; max-width: 60ch; font-size: 0.95rem; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 16px;
+  }
+</style>

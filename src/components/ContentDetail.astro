@@ -1,0 +1,81 @@
+---
+interface Props {
+  title: string;
+  side: 'blue' | 'red';
+  tags: string[];
+  date: Date;
+  updated?: Date;
+  backHref: string;
+  backLabel: string;
+  kicker: string;
+}
+const { title, side, tags, date, updated, backHref, backLabel, kicker } = Astro.props;
+const dateStr = date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+const updatedStr = updated?.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<main class={`wrap detail side-${side}`}>
+  <a class="back mono" href={backHref}>← {backLabel}</a>
+
+  <header class="detail-head">
+    <p class="kicker">{kicker}</p>
+    <div class="side-row">
+      <span class={`side-dot side-dot-${side}`} aria-hidden="true"></span>
+      <span class="side-label mono">{side === 'blue' ? 'Blue Team' : 'Red Team'}</span>
+    </div>
+    <h1>{title}</h1>
+    <div class="meta mono faint">
+      <span>publie le {dateStr}</span>
+      {updatedStr && <span>· mis a jour le {updatedStr}</span>}
+    </div>
+    <div class="detail-tags">
+      {tags.map((t) => <span class="tag">{t}</span>)}
+    </div>
+  </header>
+
+  <article class="prose">
+    <slot />
+  </article>
+</main>
+
+<style>
+  .detail { padding: 60px 0 40px; max-width: 800px; }
+  .side-blue { --side-color: var(--blue); }
+  .side-red { --side-color: var(--red); }
+
+  .back { display: inline-block; color: var(--side-color); font-size: 13px; margin-bottom: 30px; transition: opacity 0.2s; }
+  .back:hover { opacity: 0.7; }
+
+  .detail-head { border-bottom: 1px solid var(--border); padding-bottom: 26px; margin-bottom: 36px; }
+  .detail-head .kicker { color: var(--side-color); }
+  .side-row { display: flex; align-items: center; gap: 8px; margin: 14px 0 6px; }
+  .side-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .side-dot-blue { background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+  .side-dot-red { background: var(--red); box-shadow: 0 0 8px var(--red); }
+  .side-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--side-color); }
+
+  .detail-head h1 { font-size: clamp(1.9rem, 5vw, 2.7rem); margin: 6px 0 14px; }
+  .meta { font-size: 12.5px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .detail-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .detail-tags .tag { color: var(--side-color); }
+
+  /* mise en forme du contenu markdown */
+  .prose { font-size: 1.02rem; line-height: 1.75; color: var(--text); }
+  .prose :global(h2) { font-size: 1.5rem; margin: 38px 0 14px; }
+  .prose :global(h3) { font-size: 1.2rem; margin: 28px 0 10px; }
+  .prose :global(p) { margin: 16px 0; color: var(--text-dim); }
+  .prose :global(a) { color: var(--side-color); text-decoration: underline; text-underline-offset: 3px; }
+  .prose :global(a:hover) { color: var(--lime); }
+  .prose :global(ul), .prose :global(ol) { margin: 16px 0; padding-left: 24px; color: var(--text-dim); }
+  .prose :global(li) { margin: 8px 0; }
+  .prose :global(strong) { color: var(--text); font-weight: 600; }
+  .prose :global(blockquote) {
+    border-left: 2px solid var(--side-color);
+    padding-left: 18px; margin: 22px 0; color: var(--text-dim); font-style: italic;
+  }
+  .prose :global(img) { max-width: 100%; border-radius: 10px; border: 1px solid var(--border); margin: 22px 0; }
+  .prose :global(hr) { border: none; border-top: 1px solid var(--border); margin: 34px 0; }
+  .prose :global(table) { width: 100%; border-collapse: collapse; margin: 22px 0; font-size: 0.92rem; }
+  .prose :global(th), .prose :global(td) { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+  .prose :global(th) { background: var(--panel); color: var(--text); }
+</style>

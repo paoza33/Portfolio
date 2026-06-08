@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import SideToggle from '../components/SideToggle.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import WritingFeed from '../components/WritingFeed.astro';
+import Certs from '../components/Certs.astro';
+import { SPL_REPO } from '../consts';
+---
+
+<Base>
+  <Hero />
+
+  <div class="wrap"><SideToggle /></div>
+
+  <ProjectGrid />
+
+  <!-- Bande SPL : la vitrine des requetes -->
+  <section class="section" id="spl-band">
+    <div class="wrap">
+      <a class="spl-band reveal" href="/spl/">
+        <div class="spl-text">
+          <p class="kicker">// detection · splunk</p>
+          <h2>150+ requetes SPL documentees</h2>
+          <p class="muted">
+            Une bibliotheque de recherches Splunk pour la detection et l'investigation.
+            Decouvre une selection commentee, avec le contexte de menace et le mapping MITRE ATT&CK.
+          </p>
+        </div>
+        <span class="spl-cta mono">Voir la selection →</span>
+      </a>
+    </div>
+  </section>
+
+  <WritingFeed />
+
+  <Certs />
+</Base>
+
+<style>
+  .section { padding: 30px 0; }
+  .spl-band {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background:
+      radial-gradient(ellipse 60% 120% at 88% 50%, var(--green-glow), transparent 70%),
+      var(--panel);
+    padding: 30px 32px;
+    transition: border-color 0.2s, box-shadow 0.25s, transform 0.2s;
+  }
+  .spl-band:hover {
+    border-color: var(--green);
+    box-shadow: 0 0 30px -12px var(--green-glow);
+    transform: translateY(-2px);
+  }
+  .spl-text { max-width: 62ch; }
+  .spl-text h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 8px 0 10px; }
+  .spl-text p { font-size: 0.95rem; }
+  .spl-cta { color: var(--green); font-size: 14px; white-space: nowrap; }
+</style>

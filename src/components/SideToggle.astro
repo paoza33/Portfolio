@@ -1,0 +1,72 @@
+---
+// Bascule Blue / Red / Tout.
+// - change data-mode sur <html> (pilote l'accent et la lueur)
+// - cote inactif : projets DESATURES (toujours visibles), flux MASQUE
+---
+
+<div class="toggle-zone reveal" style="animation-delay: 0.1s">
+  <div class="toggle" role="group" aria-label="Filtrer par Blue Team ou Red Team">
+    <button class="t-btn is-active" data-set="all" aria-pressed="true">Tout</button>
+    <button class="t-btn t-blue" data-set="blue" aria-pressed="false">Blue Team</button>
+    <button class="t-btn t-red" data-set="red" aria-pressed="false">Red Team</button>
+  </div>
+  <p class="toggle-hint mono muted">Choisis un angle. Les projets de l'autre cote s'estompent, les notes se filtrent.</p>
+</div>
+
+<style>
+  .toggle-zone { display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 4px 0 12px; }
+  .toggle {
+    display: inline-flex;
+    gap: 6px;
+    padding: 6px;
+    background: var(--panel);
+    border: 1px solid var(--border-strong);
+    border-radius: 100px;
+  }
+  .t-btn {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dim);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 100px;
+    padding: 8px 22px;
+    cursor: pointer;
+    transition: all 0.22s ease;
+  }
+  .t-btn:hover { color: var(--text); }
+
+  .t-btn.is-active { color: #04130a; background: var(--green); }
+  .t-blue.is-active { background: var(--blue); color: #fff; }
+  .t-red.is-active { background: var(--red); color: #fff; }
+
+  .toggle-hint { font-size: 12.5px; text-align: center; }
+</style>
+
+<script>
+  function applyMode(mode: string) {
+    const html = document.documentElement;
+    html.setAttribute('data-mode', mode);
+
+    document.querySelectorAll<HTMLButtonElement>('.t-btn').forEach((b) => {
+      const on = b.dataset.set === mode;
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-pressed', String(on));
+    });
+
+    // Projets : on desature le cote inactif (jamais masque)
+    document.querySelectorAll<HTMLElement>('[data-zone="projets"] [data-side]').forEach((el) => {
+      const side = el.dataset.side;
+      el.classList.toggle('dimmed', mode !== 'all' && side !== mode);
+    });
+
+    // Le flux ecrit gere lui-meme son affichage (recherche + tag + cote)
+    // via l'evenement ci-dessous, pour eviter tout conflit de filtres.
+    document.dispatchEvent(new CustomEvent('side:change', { detail: { mode } }));
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.t-btn').forEach((btn) => {
+    btn.addEventListener('click', () => applyMode(btn.dataset.set || 'all'));
+  });
+</script>

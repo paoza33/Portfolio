@@ -1,0 +1,93 @@
+---
+interface Props {
+  title: string;
+  summary: string;
+  side: 'blue' | 'red';
+  tags: string[];
+  href: string;
+  external?: boolean;
+  date: Date;
+  updated?: Date;
+}
+
+const { title, summary, side, tags, href, external, date, updated } = Astro.props;
+const dateAffichee = updated ?? date;
+const label = updated ? 'mis a jour' : 'cree';
+const dateStr = dateAffichee.toLocaleDateString('fr-FR', { year: 'numeric', month: 'short' });
+---
+
+<a
+  class={`card side-${side}`}
+  href={href}
+  data-side={side}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener' : undefined}
+>
+  <div class="card-top">
+    <span class={`side-dot side-dot-${side}`} aria-hidden="true"></span>
+    <span class="side-label mono">{side === 'blue' ? 'Blue Team' : 'Red Team'}</span>
+    {external && <span class="ext mono" aria-label="lien externe">↗</span>}
+  </div>
+
+  <h3 class="card-title">{title}</h3>
+  <p class="card-summary">{summary}</p>
+
+  <div class="card-foot">
+    <div class="card-tags">
+      {tags.slice(0, 4).map((t) => <span class="tag">{t}</span>)}
+    </div>
+    <span class="card-date faint mono">{label} {dateStr}</span>
+  </div>
+</a>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--side-color);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    transition: border-color 0.2s, box-shadow 0.25s, transform 0.2s, opacity 0.35s, filter 0.35s;
+    height: 100%;
+  }
+  .side-blue { --side-color: var(--blue); --side-glow: var(--blue-glow); }
+  .side-red  { --side-color: var(--red);  --side-glow: var(--red-glow); }
+
+  .card:hover {
+    border-color: var(--side-color);
+    box-shadow: 0 0 26px -8px var(--side-glow);
+    transform: translateY(-2px);
+  }
+
+  /* cote inactif : desature + estompe, sans avoir l'air casse */
+  .card.dimmed {
+    opacity: 0.5;
+    filter: saturate(0.25);
+  }
+  .card.dimmed:hover { opacity: 0.8; filter: saturate(0.6); transform: none; box-shadow: none; }
+
+  .card-top { display: flex; align-items: center; gap: 8px; }
+  .side-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .side-dot-blue { background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+  .side-dot-red  { background: var(--red);  box-shadow: 0 0 8px var(--red); }
+  .side-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--side-color); }
+  .ext { margin-left: auto; color: var(--text-faint); font-size: 14px; }
+
+  .card-title { font-size: 1.18rem; }
+  .card-summary { color: var(--text-dim); font-size: 0.95rem; flex: 1; }
+
+  .card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+  }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .card-tags .tag { color: var(--side-color); }
+  .card-date { font-size: 11px; white-space: nowrap; }
+</style>

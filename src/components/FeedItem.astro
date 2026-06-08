@@ -1,0 +1,79 @@
+---
+interface Props {
+  title: string;
+  summary: string;
+  side: 'blue' | 'red';
+  tags: string[];
+  href: string;
+  date: Date;
+  updated?: Date;
+}
+const { title, summary, side, tags, href, date, updated } = Astro.props;
+const dateAffichee = updated ?? date;
+const label = updated ? 'mis a jour le' : '';
+const dateStr = dateAffichee.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<a
+  class={`feed-item side-${side}`}
+  href={href}
+  data-side={side}
+  data-tags={tags.join(',').toLowerCase()}
+  data-title={title.toLowerCase()}
+  data-summary={summary.toLowerCase()}
+>
+  <div class="fi-main">
+    <div class="fi-head">
+      <span class={`side-dot side-dot-${side}`} aria-hidden="true"></span>
+      <h3 class="fi-title">{title}</h3>
+    </div>
+    <p class="fi-summary muted">{summary}</p>
+    <div class="fi-tags">
+      {tags.map((t) => <span class="tag">{t}</span>)}
+    </div>
+  </div>
+  <div class="fi-meta">
+    <span class="faint mono fi-date">{label} {dateStr}</span>
+    <span class="fi-arrow" aria-hidden="true">→</span>
+  </div>
+</a>
+
+<style>
+  .feed-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 22px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--panel);
+    transition: border-color 0.2s, box-shadow 0.25s, transform 0.2s;
+  }
+  .side-blue { --side-color: var(--blue); --side-glow: var(--blue-glow); }
+  .side-red  { --side-color: var(--red);  --side-glow: var(--red-glow); }
+  .feed-item:hover {
+    border-color: var(--side-color);
+    box-shadow: 0 0 24px -10px var(--side-glow);
+    transform: translateX(3px);
+  }
+  .feed-item.hidden { display: none; }
+
+  .fi-head { display: flex; align-items: center; gap: 10px; }
+  .side-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+  .side-dot-blue { background: var(--blue); box-shadow: 0 0 7px var(--blue); }
+  .side-dot-red  { background: var(--red);  box-shadow: 0 0 7px var(--red); }
+  .fi-title { font-size: 1.1rem; }
+  .fi-summary { font-size: 0.92rem; margin: 8px 0 12px; }
+  .fi-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .fi-tags .tag { color: var(--side-color); }
+
+  .fi-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; flex: none; }
+  .fi-date { font-size: 11px; white-space: nowrap; }
+  .fi-arrow { color: var(--side-color); font-size: 18px; }
+
+  @media (max-width: 620px) {
+    .feed-item { flex-direction: column; align-items: stretch; gap: 12px; }
+    .fi-meta { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+</style>

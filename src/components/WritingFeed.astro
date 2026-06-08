@@ -1,0 +1,156 @@
+---
+import { getCollection } from 'astro:content';
+import FeedItem from './FeedItem.astro';
+
+const articles = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => (b.data.updated ?? b.data.date).getTime() - (a.data.updated ?? a.data.date).getTime()
+);
+
+// tous les tags uniques pour la barre de filtre
+const tags = [...new Set(articles.flatMap((a) => a.data.tags))].sort();
+---
+
+<section class="section" id="blog" data-zone="feed">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="kicker">// notes & articles</p>
+      <h2>Le journal de bord</h2>
+      <p class="section-sub muted">
+        Write-ups, notes techniques et retours d'experience. Filtre par sujet, ou cherche directement.
+      </p>
+    </div>
+
+    <div class="feed-controls reveal">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12Z"/></svg>
+        <input type="search" id="feed-search" placeholder="Rechercher une note, un sujet..." aria-label="Rechercher" />
+      </div>
+      <div class="tag-bar" role="group" aria-label="Filtrer par tag">
+        <button class="tag-btn is-active" data-tag="">Tous</button>
+        {tags.map((t) => <button class="tag-btn" data-tag={t.toLowerCase()}>{t}</button>)}
+      </div>
+    </div>
+
+    <p class="feed-count mono faint" id="feed-count">{articles.length} entrees</p>
+
+    <div class="feed-list" id="feed-list">
+      {articles.map((a) => (
+        <FeedItem
+          title={a.data.title}
+          summary={a.data.summary}
+          side={a.data.side}
+          tags={a.data.tags}
+          date={a.data.date}
+          updated={a.data.updated}
+          href={`/blog/${a.slug}/`}
+        />
+      ))}
+    </div>
+
+    <p class="feed-empty mono muted" id="feed-empty" hidden>Aucune entree ne correspond a ce filtre.</p>
+  </div>
+</section>
+
+<style>
+  .section { padding: 30px 0 50px; }
+  .section-head { margin-bottom: 22px; }
+  .section-head h2 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); margin-top: 8px; }
+  .section-sub { margin-top: 10px; max-width: 60ch; font-size: 0.95rem; }
+
+  .feed-controls { display: flex; flex-direction: column; gap: 14px; margin-bottom: 16px; }
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--panel);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    padding: 0 16px;
+  }
+  .search-box svg { width: 18px; height: 18px; fill: var(--text-faint); flex: none; }
+  .search-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 0.98rem;
+    padding: 14px 0;
+  }
+  .search-box input::placeholder { color: var(--text-faint); }
+  .search-box:focus-within { border-color: var(--accent); box-shadow: 0 0 18px -6px var(--accent-glow); }
+
+  .tag-bar { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag-btn {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--text-dim);
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    border-radius: 100px;
+    padding: 5px 14px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+  .tag-btn:hover { color: var(--text); border-color: var(--text-dim); }
+  .tag-btn.is-active { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 14px -6px var(--accent-glow); }
+
+  .feed-count { font-size: 12px; margin-bottom: 14px; }
+  .feed-list { display: flex; flex-direction: column; gap: 12px; }
+  .feed-empty { padding: 30px 0; text-align: center; }
+</style>
+
+<script>
+  const list = document.getElementById('feed-list');
+  const search = document.getElementById('feed-search') as HTMLInputElement | null;
+  const count = document.getElementById('feed-count');
+  const empty = document.getElementById('feed-empty');
+  const tagBtns = document.querySelectorAll<HTMLButtonElement>('.tag-btn');
+
+  let activeTag = '';
+  let query = '';
+
+  function recompute() {
+    if (!list) return;
+    const mode = document.documentElement.dataset.mode || 'all';
+    const items = list.querySelectorAll<HTMLElement>('.feed-item');
+    let visible = 0;
+
+    items.forEach((el) => {
+      const side = el.dataset.side || '';
+      const itemTags = el.dataset.tags || '';
+      const title = el.dataset.title || '';
+      const summary = el.dataset.summary || '';
+
+      const okSide = mode === 'all' || side === mode;
+      const okTag = !activeTag || itemTags.split(',').includes(activeTag);
+      const okQuery = !query || title.includes(query) || summary.includes(query) || itemTags.includes(query);
+
+      const show = okSide && okTag && okQuery;
+      el.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+
+    if (count) count.textContent = `${visible} ${visible > 1 ? 'entrees' : 'entree'}`;
+    if (empty) empty.hidden = visible !== 0;
+  }
+
+  tagBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      activeTag = btn.dataset.tag || '';
+      tagBtns.forEach((b) => b.classList.toggle('is-active', b === btn));
+      recompute();
+    });
+  });
+
+  search?.addEventListener('input', () => {
+    query = search.value.trim().toLowerCase();
+    recompute();
+  });
+
+  // recalcule quand la bascule Blue/Red change
+  document.addEventListener('side:change', recompute);
+
+  recompute();
+</script>
