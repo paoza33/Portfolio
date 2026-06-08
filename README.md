@@ -19,7 +19,7 @@ npm run dev
 Ouvrir à l'adresse affichee dans le terminal (en general
 `http://localhost:4321`). Le site se met à jour tout seul à chaque modification.
 
-Pour verifier la version finale telle qu'elle sera publiée :
+Pour vérifier la version finale telle qu'elle sera publiée :
 
 ```bash
 npm run build      # fabrique le site dans le dossier dist/
