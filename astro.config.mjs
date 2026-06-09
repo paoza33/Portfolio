@@ -1,10 +1,15 @@
 import { defineConfig } from 'astro/config';
+import rehypeExternalLinks from 'rehype-external-links';
 
 // https://astro.build
 export default defineConfig({
-  // Remplace par ton URL finale une fois deployee (ex: https://mehdikadri.vercel.app)
-  site: 'https://exemple.vercel.app',
+  site: 'https://portfolio-mkadri.vercel.app',
   build: {
     format: 'directory',
+  },
+  markdown: {
+    rehypePlugins: [
+      [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
+    ],
   },
 });
