@@ -35,7 +35,7 @@ export const LIENS = {
 };
 
 // Lien vers le depot GitHub qui contient tes 150+ requetes SPL
-export const SPL_REPO = 'https://github.com/paoza33/Cyber';
+export const SPL_REPO = 'https://github.com/paoza33/Cyber/blob/main/blue_team/splunk/spl_queries.md';
 
 // Mes certifications.
 // statut : 'obtenu' | 'en-cours' | 'planifie'
