@@ -16,7 +16,7 @@ const tags = [...new Set(articles.flatMap((a) => a.data.tags))].sort();
       <p class="kicker">// notes & articles</p>
       <h2>Le journal de bord</h2>
       <p class="section-sub muted">
-        Write-ups, notes techniques et retours d'experience. Filtre par sujet, ou cherche directement.
+        Write-ups, notes techniques et retours d'experience.
       </p>
     </div>
 
@@ -48,6 +48,10 @@ const tags = [...new Set(articles.flatMap((a) => a.data.tags))].sort();
     </div>
 
     <p class="feed-empty mono muted" id="feed-empty" hidden>Aucune entree ne correspond a ce filtre.</p>
+
+    <div class="feed-more" id="feed-more" hidden>
+      <button class="more-btn mono" id="more-btn" type="button"></button>
+    </div>
   </div>
 </section>
 
@@ -99,23 +103,40 @@ const tags = [...new Set(articles.flatMap((a) => a.data.tags))].sort();
   .feed-count { font-size: 12px; margin-bottom: 14px; }
   .feed-list { display: flex; flex-direction: column; gap: 12px; }
   .feed-empty { padding: 30px 0; text-align: center; }
+
+  .feed-more { display: flex; justify-content: center; margin-top: 22px; }
+  .more-btn {
+    font-size: 13px;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    border-radius: 100px;
+    padding: 9px 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .more-btn:hover { color: var(--lime); border-color: var(--lime); box-shadow: 0 0 16px -6px var(--green-glow); }
 </style>
 
 <script>
+  const LIMIT = 6;
   const list = document.getElementById('feed-list');
   const search = document.getElementById('feed-search') as HTMLInputElement | null;
   const count = document.getElementById('feed-count');
   const empty = document.getElementById('feed-empty');
+  const moreWrap = document.getElementById('feed-more');
+  const moreBtn = document.getElementById('more-btn');
   const tagBtns = document.querySelectorAll<HTMLButtonElement>('.tag-btn');
 
   let activeTag = '';
   let query = '';
+  let expanded = false;
 
   function recompute() {
     if (!list) return;
     const mode = document.documentElement.dataset.mode || 'all';
     const items = list.querySelectorAll<HTMLElement>('.feed-item');
-    let visible = 0;
+    let matching = 0;
 
     items.forEach((el) => {
       const side = el.dataset.side || '';
@@ -126,31 +147,54 @@ const tags = [...new Set(articles.flatMap((a) => a.data.tags))].sort();
       const okSide = mode === 'all' || side === mode;
       const okTag = !activeTag || itemTags.split(',').includes(activeTag);
       const okQuery = !query || title.includes(query) || summary.includes(query) || itemTags.includes(query);
+      const passes = okSide && okTag && okQuery;
 
-      const show = okSide && okTag && okQuery;
-      el.classList.toggle('hidden', !show);
-      if (show) visible++;
+      // visible si passe les filtres ET (dans la limite OU vue depliee)
+      const withinLimit = expanded || matching < LIMIT;
+      el.style.display = passes && withinLimit ? '' : 'none';
+      if (passes) matching++;
     });
 
-    if (count) count.textContent = `${visible} ${visible > 1 ? 'entrees' : 'entree'}`;
-    if (empty) empty.hidden = visible !== 0;
+    if (count) count.textContent = `${matching} ${matching > 1 ? 'entrees' : 'entree'}`;
+    if (empty) empty.hidden = matching !== 0;
+
+    // bouton voir plus / voir moins
+    if (moreWrap && moreBtn) {
+      const reste = matching - LIMIT;
+      if (reste > 0) {
+        moreWrap.hidden = false;
+        moreBtn.textContent = expanded ? 'Voir moins' : `Voir plus (${reste})`;
+      } else {
+        moreWrap.hidden = true;
+      }
+    }
+  }
+
+  function resetAndRecompute() {
+    expanded = false;
+    recompute();
   }
 
   tagBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       activeTag = btn.dataset.tag || '';
       tagBtns.forEach((b) => b.classList.toggle('is-active', b === btn));
-      recompute();
+      resetAndRecompute();
     });
   });
 
   search?.addEventListener('input', () => {
     query = search.value.trim().toLowerCase();
+    resetAndRecompute();
+  });
+
+  moreBtn?.addEventListener('click', () => {
+    expanded = !expanded;
     recompute();
   });
 
-  // recalcule quand la bascule Blue/Red change
-  document.addEventListener('side:change', recompute);
+  // recalcule (et replie) quand la bascule Blue/Red change
+  document.addEventListener('side:change', resetAndRecompute);
 
   recompute();
 </script>

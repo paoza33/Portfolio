@@ -27,4 +27,9 @@ const blog = defineCollection({
   schema: baseSchema,
 });
 
-export const collections = { projets, blog };
+const writeups = defineCollection({
+  type: 'content',
+  schema: baseSchema,
+});
+
+export const collections = { projets, blog, writeups };

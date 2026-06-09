@@ -23,11 +23,32 @@ import { SPL_REPO } from '../consts';
           <p class="kicker">// detection · splunk</p>
           <h2>150+ requetes SPL documentees</h2>
           <p class="muted">
-            Une bibliotheque de recherches Splunk pour la détection et l'investigation.
-            Decouvre une selection commentée, avec le contexte de menace et le mapping MITRE ATT&CK.
+            Une bibliotheque de recherches Splunk pour la detection et l'investigation.
+            Decouvre une selection commentee, avec le contexte de menace et le mapping MITRE ATT&CK.
           </p>
         </div>
-        <span class="spl-cta mono">Voir la sélection →</span>
+        <span class="spl-cta mono">Voir la selection →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Bande write-ups : la page dediee -->
+  <section class="section" id="wu-band-section">
+    <div class="wrap">
+      <a class="spl-band wu-band reveal" href="/writeups/">
+        <div class="spl-text">
+          <p class="kicker">
+            <span class="dot dot-blue" aria-hidden="true"></span>
+            <span class="dot dot-red" aria-hidden="true"></span>
+            // write-ups
+          </p>
+          <h2>Write-ups de machines, challenges et Sherlocks</h2>
+          <p class="muted">
+            Ma démarche en conditions reelles, du cote offensif comme defensif.
+            Filtrable par angle Blue ou Red, et cherchable.
+          </p>
+        </div>
+        <span class="spl-cta wu-cta mono">Voir les write-ups →</span>
       </a>
     </div>
   </section>
@@ -62,4 +83,20 @@ import { SPL_REPO } from '../consts';
   .spl-text h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 8px 0 10px; }
   .spl-text p { font-size: 0.95rem; }
   .spl-cta { color: var(--green); font-size: 14px; white-space: nowrap; }
+
+  /* bande write-ups : teinte duale (bleu + rouge), neutre au repos */
+  .wu-band {
+    background:
+      radial-gradient(ellipse 50% 120% at 8% 50%, var(--blue-glow), transparent 60%),
+      radial-gradient(ellipse 50% 120% at 92% 50%, var(--red-glow), transparent 60%),
+      var(--panel);
+  }
+  .wu-band:hover {
+    border-color: var(--border-strong);
+    box-shadow: 0 0 30px -14px var(--blue-glow), 0 0 30px -14px var(--red-glow);
+  }
+  .wu-cta { color: var(--text); }
+  .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 2px; vertical-align: middle; }
+  .dot-blue { background: var(--blue); box-shadow: 0 0 7px var(--blue); }
+  .dot-red { background: var(--red); box-shadow: 0 0 7px var(--red); }
 </style>

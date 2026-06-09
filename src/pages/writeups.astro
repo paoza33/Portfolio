@@ -1,0 +1,124 @@
+---
+import Base from '../layouts/Base.astro';
+import FeedItem from '../components/FeedItem.astro';
+import { getCollection } from 'astro:content';
+
+const writeups = (await getCollection('writeups', ({ data }) => !data.draft)).sort(
+  (a, b) => (b.data.updated ?? b.data.date).getTime() - (a.data.updated ?? a.data.date).getTime()
+);
+---
+
+<Base title="Write-ups" description="Write-ups de machines, challenges et Sherlocks : démarche offensive et investigation défensive.">
+  <main class="wrap detail" data-zone="writeups">
+    <a class="back mono" href="/">← retour</a>
+
+    <header class="detail-head reveal">
+      <p class="kicker">// write-ups</p>
+      <h1>Write-ups</h1>
+      <p class="detail-sub muted">
+        Machines et challenges offensifs, investigations défensives. La bascule sépare les deux angles, la recherche fouille l'ensemble.
+      </p>
+    </header>
+
+    <div class="wu-controls reveal">
+      <div class="toggle" role="group" aria-label="Filtrer par Blue Team ou Red Team">
+        <button class="t-btn is-active" data-set="all" aria-pressed="true">Tous</button>
+        <button class="t-btn t-blue" data-set="blue" aria-pressed="false">Blue Team</button>
+        <button class="t-btn t-red" data-set="red" aria-pressed="false">Red Team</button>
+      </div>
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12Z"/></svg>
+        <input type="search" id="wu-search" placeholder="Rechercher un write-up..." aria-label="Rechercher" />
+      </div>
+    </div>
+
+    <p class="wu-count mono faint" id="wu-count">{writeups.length} write-ups</p>
+
+    <div class="feed-list" id="wu-list">
+      {writeups.map((w) => (
+        <FeedItem
+          title={w.data.title}
+          summary={w.data.summary}
+          side={w.data.side}
+          tags={w.data.tags}
+          date={w.data.date}
+          updated={w.data.updated}
+          href={`/writeups/${w.slug}/`}
+        />
+      ))}
+    </div>
+
+    <p class="mono muted wu-empty" id="wu-empty" hidden>Aucun write-up ne correspond.</p>
+  </main>
+</Base>
+
+<style>
+  .detail { padding: 60px 0 40px; max-width: 880px; }
+  .back { display: inline-block; color: var(--accent); font-size: 13px; margin-bottom: 30px; transition: color 0.2s; }
+  .back:hover { color: var(--lime); }
+  .detail-head h1 { font-size: clamp(2rem, 5vw, 2.8rem); margin: 10px 0; }
+  .detail-sub { max-width: 60ch; font-size: 1rem; }
+
+  .wu-controls { display: flex; flex-direction: column; gap: 14px; margin: 30px 0 16px; }
+  .toggle { display: inline-flex; gap: 6px; padding: 6px; background: var(--panel); border: 1px solid var(--border-strong); border-radius: 100px; align-self: flex-start; }
+  .t-btn { font-family: var(--font-mono); font-size: 14px; font-weight: 500; color: var(--text-dim); background: transparent; border: 1px solid transparent; border-radius: 100px; padding: 8px 22px; cursor: pointer; transition: all 0.22s ease; }
+  .t-btn:hover { color: var(--text); }
+  .t-btn.is-active { color: #04130a; background: var(--green); }
+  .t-blue.is-active { background: var(--blue); color: #fff; }
+  .t-red.is-active { background: var(--red); color: #fff; }
+
+  .search-box { display: flex; align-items: center; gap: 10px; background: var(--panel); border: 1px solid var(--border-strong); border-radius: var(--radius); padding: 0 16px; }
+  .search-box svg { width: 18px; height: 18px; fill: var(--text-faint); flex: none; }
+  .search-box input { flex: 1; background: transparent; border: none; outline: none; color: var(--text); font-family: var(--font-sans); font-size: 0.98rem; padding: 14px 0; }
+  .search-box input::placeholder { color: var(--text-faint); }
+  .search-box:focus-within { border-color: var(--accent); box-shadow: 0 0 18px -6px var(--accent-glow); }
+
+  .wu-count { font-size: 12px; margin-bottom: 14px; }
+  .feed-list { display: flex; flex-direction: column; gap: 12px; }
+  .wu-empty { padding: 30px 0; text-align: center; }
+</style>
+
+<script>
+  const list = document.getElementById('wu-list');
+  const search = document.getElementById('wu-search') as HTMLInputElement | null;
+  const count = document.getElementById('wu-count');
+  const empty = document.getElementById('wu-empty');
+  const tBtns = document.querySelectorAll<HTMLButtonElement>('.t-btn');
+
+  let mode = 'all';
+  let query = '';
+
+  function recompute() {
+    if (!list) return;
+    const items = list.querySelectorAll<HTMLElement>('.feed-item');
+    let visible = 0;
+    items.forEach((el) => {
+      const side = el.dataset.side || '';
+      const title = el.dataset.title || '';
+      const summary = el.dataset.summary || '';
+      const tags = el.dataset.tags || '';
+      const okSide = mode === 'all' || side === mode;
+      const okQuery = !query || title.includes(query) || summary.includes(query) || tags.includes(query);
+      const show = okSide && okQuery;
+      el.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (count) count.textContent = `${visible} ${visible > 1 ? 'write-ups' : 'write-up'}`;
+    if (empty) empty.hidden = visible !== 0;
+  }
+
+  tBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      mode = btn.dataset.set || 'all';
+      document.documentElement.setAttribute('data-mode', mode);
+      tBtns.forEach((b) => {
+        const on = b === btn;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
+      recompute();
+    });
+  });
+  search?.addEventListener('input', () => { query = search.value.trim().toLowerCase(); recompute(); });
+  recompute();
+</script>
