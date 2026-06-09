@@ -14,6 +14,8 @@ Projet support du titre Administrateur d'Infrastructures Sécurisées (AIS, RNCP
 
 La clinique manipule des données de santé sensibles (dossiers patients, rendez-vous, prescriptions), ce qui place le RGPD et les recommandations de l'ANSSI au centre de chaque décision. Le dimensionnement reste celui d'une structure de taille moyenne : les choix doivent rester tenables pour une petite équipe IT.
 
+Retrouvez le projet complet Cleanic en suivant ce lien : [Cleanic](https://github.com/paoza33/Cyber/blob/main/AIS/Cleanic.pdf)
+
 ## Architecture
 
 ![Architecture Cleanic](/images/cleanic_infra.png)
