@@ -2,12 +2,12 @@
 title: "CCTV"
 date: 2026-06-09
 side: "red"
-tags: ["machine", "linux", "sqli", "rce", "privesc"]
+tags: ["htb","machine", "linux", "sqli", "rce", "privesc"]
 summary: "Machine Linux résolue. Chaîne web vers root : CVE sur l'application, réutilisation d'identifiants, pivot SSH, puis injection de commande sur un service local en root."
 draft: false
 ---
 
-> Machine actuellement active. Par respect des règles de la plateforme, je ne fournis pas de write-up détaillé ni de flag. Voici les techniques et les outils mis en oeuvre pour la résoudre.
+> Machine actuellement active. Par respect des règles de la plateforme Hack The Box, je ne fournis pas de write-up détaillé ni de flag. Voici les techniques et les outils mis en oeuvre pour la résoudre.
 
 ## Résolue
 

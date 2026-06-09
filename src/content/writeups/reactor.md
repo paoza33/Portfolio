@@ -7,7 +7,7 @@ summary: "Machine Linux. RCE pré-authentification par désérialisation, exfilt
 draft: false
 ---
 
-> Machine actuellement active. Par respect des règles de la plateforme, je ne fournis pas de write-up détaillé ni de flag. Voici les techniques et les outils mis en oeuvre pour la résoudre.
+> Machine actuellement active. Par respect des règles de la plateforme Hack The Box, je ne fournis pas de write-up détaillé ni de flag. Voici les techniques et les outils mis en oeuvre pour la résoudre.
 
 ## Résolue
 
