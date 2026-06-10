@@ -1,6 +1,6 @@
 ---
 title: "Connected"
-date: 2026-06-08
+date: 2026-06-07
 side: "red"
 tags: ["htb", "linux", "machine", "sqli", "rce", "cve"]
 summary: "Machine Linux. SQLi non authentifiée menant à une RCE, puis root via un déclencheur incron exécuté sur un chemin inscriptible."

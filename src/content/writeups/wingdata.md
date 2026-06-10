@@ -1,6 +1,6 @@
 ---
 title: "WingData"
-date: 2026-05-25
+date: 2026-03-16
 side: "red"
 tags: ["htb", "linux", "machine", "rce", "cve", "hash-cracking"]
 summary: "Machine Linux. RCE pré-authentification sur un service proxifié, extraction et crack de hashes salés, puis root via une CVE d'extraction d'archive."

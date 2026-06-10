@@ -1,6 +1,6 @@
 ---
 title: "Silentium"
-date: 2026-05-18
+date: 2026-04-25
 side: "red"
 tags: ["htb", "linux", "machine", "web", "rce", "ssh-tunneling"]
 summary: "Machine Linux (facile). Account takeover par fuite de token, RCE via injection de code, pivot vers l'hote par secrets exposés, puis root via une CVE sur un service interne."

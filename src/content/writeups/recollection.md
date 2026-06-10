@@ -1,6 +1,6 @@
 ---
 title: "Recollection"
-date: 2026-06-10
+date: 2026-05-16
 side: "blue"
 tags: ["htb", "windows", "sherlock", "memory-forensics", "volatility", "dfir"]
 summary: "Investigation forensique d'un dump mémoire Windows 7 compromis. Reconstruction des actions de l'attaquant avec Volatility : PowerShell obfusqué, tentative d'exfiltration, malware identifié et artefacts navigateur."

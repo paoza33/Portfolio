@@ -1,6 +1,6 @@
 ---
 title: "Reactor"
-date: 2026-06-01
+date: 2026-05-25
 side: "red"
 tags: ["htb", "linux", "machine", "rce", "deserialization", "ssh-tunneling"]
 summary: "Machine Linux. RCE pré-authentification par désérialisation, exfiltration d'une base SQLite, crack de hash, puis root via abus d'un débogueur interne."

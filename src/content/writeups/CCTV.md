@@ -1,6 +1,6 @@
 ---
 title: "CCTV"
-date: 2026-06-09
+date: 2026-03-13
 side: "red"
 tags: ["htb","machine", "linux", "sqli", "rce", "privesc"]
 summary: "Machine Linux résolue. Chaîne web vers root : CVE sur l'application, réutilisation d'identifiants, pivot SSH, puis injection de commande sur un service local en root."

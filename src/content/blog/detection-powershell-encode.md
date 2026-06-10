@@ -1,6 +1,6 @@
 ---
 title: "Détecter les commandes PowerShell encodées"
-date: 2026-05-28
+date: 2026-06-08
 side: "blue"
 tags: ["splunk", "detection", "T1059"]
 summary: "Pourquoi l'argument -EncodedCommand est un signal intéressant, et comment le surveiller proprement dans Splunk sans crouler sous les faux positifs."

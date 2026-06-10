@@ -1,6 +1,6 @@
 ---
 title: "Kobold"
-date: 2026-05-12
+date: 2026-03-24
 side: "red"
 tags: ["htb", "linux", "machine", "rce", "cve", "docker"]
 summary: "Machine Linux. RCE non authentifiée sur un service exposé, puis élévation root via un abus du socket Docker."

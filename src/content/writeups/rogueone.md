@@ -1,6 +1,6 @@
 ---
 title: "RogueOne"
-date: 2026-06-10
+date: 2026-06-07
 side: "blue"
 tags: ["htb", "windows", "sherlock", "memory-forensics", "volatility", "masquerading"]
 summary: "Investigation forensique d'un dump mémoire Windows 10. Un faux svchost.exe lancé depuis Downloads échappe au coup d'oeil sur le task manager mais pas à l'analyse de filiation. Identification du processus, du canal C2 et collecte des IOC avec Volatility 3."

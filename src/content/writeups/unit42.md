@@ -1,6 +1,6 @@
 ---
 title: "Unit42"
-date: 2026-06-10
+date: 2026-05-13
 side: "blue"
 tags: ["htb", "windows", "sherlock", "sysmon", "dfir", "timestomp"]
 summary: "Sherlock HTB (DFIR, très facile) : reconstruire l'accès initial d'une campagne UltraVNC à partir d'un journal Sysmon, en s'appuyant sur les Event IDs clés."
@@ -13,7 +13,7 @@ draft: false
 
 Un seul artefact : `Microsoft-Windows-Sysmon-Operational.evtx`, 169 événements. Le contexte s'inspire d'une campagne documentée par l'Unit42 de Palo Alto, où des attaquants distribuaient une version backdoorée d'UltraVNC pour conserver l'accès aux machines. L'objectif est de reconstruire l'étape d'accès initial à partir des seuls journaux Sysmon.
 
-![Sherlock Unit42 résolu](/images/unit42.png)
+![Sherlock Unit42 résolu](/images/unit_42.png)
 
 L'analyse tient dans l'observateur d'événements Windows, complété par VirusTotal. Sur un volume plus important, je serais passé par EvtxECmd pour convertir l'EVTX en CSV et pivoter dans Timeline Explorer, mais 169 événements se lisent très bien à la main.
 
