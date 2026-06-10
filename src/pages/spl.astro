@@ -6,7 +6,7 @@ import { SPL_REPO } from '../consts';
 const categories = [...new Set(REQUETES.map((r) => r.categorie))];
 ---
 
-<Base title="Requetes SPL" description="Selection commentee de requetes Splunk pour la detection et l'investigation.">
+<Base title="Requetes SPL" description="Sélection commentée de requêtes Splunk pour la détection et l'investigation.">
   <main class="wrap detail">
     <a class="back mono" href="/">← retour</a>
 
@@ -14,19 +14,19 @@ const categories = [...new Set(REQUETES.map((r) => r.categorie))];
       <p class="kicker">// detection · splunk</p>
       <h1>Requetes SPL</h1>
       <p class="detail-sub muted">
-        Une selection commentee parmi plus de 80 requetes Splunk que je documente pour la detection
-        et l'investigation. L'integralite du depot est disponible sur GitHub.
+        Une sélection commentée parmi plus de 80 requêtes Splunk que je documente pour la detection
+        et l'investigation. L'intégralite du dépôt est disponible sur GitHub.
       </p>
       <a class="pill pill-accent repo-link" href={SPL_REPO} target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
-        Voir les 80+ requetes sur GitHub
+        Voir les 80+ requêtes sur GitHub
       </a>
     </header>
 
     <div class="spl-controls reveal">
       <div class="search-box">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12Z"/></svg>
-        <input type="search" id="spl-search" placeholder="Rechercher (nom, technique, MITRE...)" aria-label="Rechercher une requete" />
+        <input type="search" id="spl-search" placeholder="Rechercher (nom, technique, MITRE...)" aria-label="Rechercher une requête" />
       </div>
       <div class="cat-bar" role="group" aria-label="Filtrer par categorie">
         <button class="cat-btn is-active" data-cat="">Toutes</button>
@@ -34,7 +34,7 @@ const categories = [...new Set(REQUETES.map((r) => r.categorie))];
       </div>
     </div>
 
-    <p class="spl-count mono faint" id="spl-count">{REQUETES.length} requetes</p>
+    <p class="spl-count mono faint" id="spl-count">{REQUETES.length} requêtes</p>
 
     <div class="spl-list" id="spl-list">
       {REQUETES.map((r) => (
@@ -58,7 +58,7 @@ const categories = [...new Set(REQUETES.map((r) => r.categorie))];
       ))}
     </div>
 
-    <p class="mono muted spl-empty" id="spl-empty" hidden>Aucune requete ne correspond.</p>
+    <p class="mono muted spl-empty" id="spl-empty" hidden>Aucune requête ne correspond.</p>
   </main>
 </Base>
 
