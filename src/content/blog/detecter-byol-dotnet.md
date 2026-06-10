@@ -1,6 +1,6 @@
 ---
 title: "BYOL : détecter les outils .NET chargés en mémoire"
-date: 2026-06-11
+date: 2026-06-09
 side: "blue"
 tags: ["detection", "sysmon", "byol", "T1620"]
 summary: "Les attaquants embarquent de plus en plus leurs propres outils .NET et les exécutent directement en mémoire, sans jamais écrire sur le disque. Voici pourquoi c'est furtif, et le signal qui les trahit malgré tout."

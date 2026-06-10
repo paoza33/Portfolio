@@ -1,6 +1,6 @@
 ---
 title: "Aide-mémoire : les providers ETW utiles en sécurité"
-date: 2026-06-13
+date: 2026-06-09
 side: "blue"
 tags: ["reference", "etw", "windows", "detection"]
 summary: "ETW expose une télémétrie bien plus riche que les journaux Windows classiques, au niveau du noyau. Voici les providers les plus utiles en détection, ce que chacun observe, et les providers restreints qui voient ce que Sysmon ne voit pas."

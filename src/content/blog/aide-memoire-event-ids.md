@@ -1,6 +1,6 @@
 ---
 title: "Aide-mémoire : les Event IDs Windows et Sysmon"
-date: 2026-06-12
+date: 2026-06-09
 side: "blue"
 tags: ["reference", "event-id", "windows", "sysmon", "siem"]
 summary: "Référence rapide des identifiants d'événements Windows et Sysmon utiles en détection et en investigation, classés par journal, avec ce que chacun révèle et l'angle de détection associé. Inclut les types de logon, les codes d'échec Kerberos et NTLM, et les chaînes d'attaque courantes."
