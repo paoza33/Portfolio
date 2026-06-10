@@ -7,7 +7,7 @@ summary: "Investigation forensique d'un dump mémoire Windows 7 compromis. Recon
 draft: false
 ---
 
-> Sherlock retiré, résolu. Le dump n'est pas redistribué, seules la méthode et les commandes le sont.
+> Sherlock retiré, résolu. Le dump n'est pas redistribué, seules la méthode et les commandes le sont. Appartient à la liste tracks CDSA.
 
 ## Contexte
 

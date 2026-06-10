@@ -7,7 +7,7 @@ summary: "Investigation d'un Kerberoasting sur Active Directory en chaînant tro
 draft: false
 ---
 
-> Sherlock résolu. Les artefacts ne sont pas redistribués, seules la méthode et les requêtes le sont.
+> Sherlock résolu. Les artefacts ne sont pas redistribués, seules la méthode et les requêtes le sont. Appartient à la liste tracks CDSA.
 
 ## Contexte
 

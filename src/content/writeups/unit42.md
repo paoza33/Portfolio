@@ -7,7 +7,7 @@ summary: "Sherlock HTB (DFIR, très facile) : reconstruire l'accès initial d'un
 draft: false
 ---
 
-> Sherlock retiré, write-up complet.
+> Sherlock retiré, write-up complet. Appartient à la liste tracks CDSA.
 
 ## Le scénario
 

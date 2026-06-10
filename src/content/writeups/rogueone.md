@@ -7,7 +7,7 @@ summary: "Investigation forensique d'un dump mémoire Windows 10. Un faux svchos
 draft: false
 ---
 
-> Sherlock résolu. Le dump n'est pas redistribué, seules la méthode et les commandes le sont.
+> Sherlock résolu. Le dump n'est pas redistribué, seules la méthode et les commandes le sont. Appartient à la liste tracks CDSA.
 
 ## Contexte
 
