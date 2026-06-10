@@ -35,7 +35,7 @@ Au-delà de la liste d'outils, plusieurs décisions reflètent la philosophie de
 - **Sysmon n'est pas installé en service.** Une VM d'analyse n'a aucun intérêt à générer ses propres events Sysmon : ce ne serait que du bruit (navigation, lancement d'outils) qui polluerait l'investigation. Il reste disponible pour une détonation contrôlée ponctuelle, puis désinstallé.
 - **Splunk en forensic à la demande, pas en SIEM permanent.** Pas d'auto-start, pas de forwarder, pas de monitoring temps réel des journaux locaux. Splunk ne tourne que pendant une investigation, n'ingère que les artefacts qu'on lui pousse, et les indexes sont purgés une fois le Sherlock terminé. La licence Free (500 MB/jour) suffit largement à cet usage.
 - **CLI privilégiée sur le GUI** quand c'est possible, pour la reproductibilité et la scriptabilité. Les interfaces graphiques (Timeline Explorer, Ghidra, x64dbg) ne sont mobilisées que quand la navigation visuelle apporte vraiment quelque chose.
-- **L'hôte Kali sert de complément.** Tout ce qui est lourd ou natif Linux (Zeek, Suricata, acquisition mémoire via suspend VMware) reste sur l'hôte. La VM Windows reste légère et spécialisée.
+- **Une VM Kali sert de complément.** Tout ce qui est lourd ou natif Linux (Zeek, Suricata, acquisition mémoire via suspend VMware) reste sur la kali. La VM Windows reste légère et spécialisée.
 
 ## Difficultés résolues
 
