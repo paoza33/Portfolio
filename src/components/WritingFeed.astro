@@ -14,9 +14,9 @@ const tags = [...new Set(articles.flatMap((a) => a.data.tags))].sort();
   <div class="wrap">
     <div class="section-head reveal">
       <p class="kicker">// notes & articles</p>
-      <h2>Le journal de bord</h2>
+      <h2>Journal de bord</h2>
       <p class="section-sub muted">
-        Write-ups, notes techniques et retours d'experience.
+        Notes techniques et retours d'experience.
       </p>
     </div>
 
@@ -47,7 +47,7 @@ const tags = [...new Set(articles.flatMap((a) => a.data.tags))].sort();
       ))}
     </div>
 
-    <p class="feed-empty mono muted" id="feed-empty" hidden>Aucune entree ne correspond a ce filtre.</p>
+    <p class="feed-empty mono muted" id="feed-empty" hidden>Aucune entrée ne correspond a ce filtre.</p>
 
     <div class="feed-more" id="feed-more" hidden>
       <button class="more-btn mono" id="more-btn" type="button"></button>
