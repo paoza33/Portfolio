@@ -1,6 +1,6 @@
 ---
 title: "LogJammer"
-date: 2023-03-27
+date: 2026-06-11
 side: "blue"
 tags: ["htb", "windows", "sherlock", "dfir", "event-logs", "anti-forensique"]
 summary: "Sherlock DFIR Windows (facile) : à partir de cinq journaux EVTX, reconstitution de la chaîne d'attaque d'un utilisateur, du logon initial à l'effacement anti-forensique du journal pare-feu."
