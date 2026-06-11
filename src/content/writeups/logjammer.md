@@ -23,7 +23,7 @@ Mais pour changer, utilisons d'autres outils.
 
 ## Résolu
 
-![Sherlock LogJammer résolu](/images/logjammer-solved.png)
+![Sherlock LogJammer résolu](/images/logjammer.png)
 
 ## Données fournies
 
