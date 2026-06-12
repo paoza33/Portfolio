@@ -2,8 +2,8 @@
 title: "CCTV"
 date: 2026-03-13
 side: "red"
-tags: ["htb","machine", "linux", "sqli", "rce", "privesc"]
-summary: "Machine Linux résolue. Chaîne web vers root : CVE sur l'application, réutilisation d'identifiants, pivot SSH, puis injection de commande sur un service local en root."
+tags: ["htb","machine", "linux", "sqli"]
+summary: "Machine Linux. Chaîne web vers root : exploitation d'une vulnérabilité de l'application, erreur huamine, pivoting, puis élévation par mauvaise configuration."
 draft: false
 ---
 
@@ -12,23 +12,20 @@ draft: false
 ## Résolue
 
 ![Machine CCTV résolue](/images/CCTV.png)
-
 Machine Linux, compromise de bout en bout jusqu'au root.
 
 ## Techniques mises en oeuvre
 
-- Reconnaissance et identification précise de la version du logiciel web
-- Accès initial via une CVE de l'application web (injection SQL) permettant l'extraction de secrets en base
-- Crack d'un hash bcrypt par attaque par dictionnaire
-- Réutilisation d'identifiants pour un accès SSH
-- Énumération des services internes à l'hote
-- Pivot via tunneling SSH (redirection de port) vers un service accessible seulement en local
-- Élévation de privilèges par injection de commande dans un service local exécuté en root (RCE)
+- Énumération
+- Exploitation de CVE
+- Extraction de secrets
+- Obtention d'informations sensibles
+- Pivoting
+- Root par abus d'un composant privilégié
 
 ## Outils utilisés
 
-- PoC public de la CVE
-- john (crack du hash)
-- ssh (accès et redirection de port)
-- netcat (réception du shell)
-- curl (déclenchement de l'exécution)
+- Outils d'énumération
+- Outils d'exploitation
+- Outils de crackage
+- ssh

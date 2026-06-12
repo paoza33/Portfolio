@@ -2,8 +2,8 @@
 title: "DevHub"
 date: 2026-06-05
 side: "red"
-tags: ["htb", "linux", "machine", "rce", "cve", "ssh-tunneling"]
-summary: "Machine Linux (Ubuntu 24.04). RCE non authentifiée sur un service exposé, pivot vers un service interne via tunnel, puis root par abus d'un service privilégié."
+tags: ["htb", "linux", "machine", "cve"]
+summary: "Machine Linux (Ubuntu 24.04). CVE sur un service exposé, pivot vers un service interne, puis root par abus d'un composant privilégié."
 draft: false
 ---
 
@@ -12,23 +12,18 @@ draft: false
 ## Résolue
 
 ![Machine DevHub résolue](/images/devhub.png)
-
 Machine Linux (Ubuntu 24.04).
 
 ## Techniques mises en oeuvre
 
-- Reconnaissance, service exposé sur un port inhabituel
-- RCE non authentifiée via une CVE (injection de commande)
-- Stabilisation du shell
-- Découverte d'un service interne, token d'authentification fuité dans la ligne de commande d'un processus
-- Pivot par tunnel inverse vers ce service interne
-- Exécution de code en tant qu'utilisateur intermédiaire
-- Root par abus d'un service interne tournant en root (outil non documenté, clé d'API en dur, lecture de la clé SSH root)
+- Énumération
+- Exploitation de CVE
+- Pivoting
+- Élévation vers un utilisateur intermédiaire
+- Root par abus d'un composant privilégié
 
 ## Outils utilisés
 
-- nmap
-- netcat
-- chisel
-- curl
+- Outils d'énumération
+- Outils de pivot
 - ssh

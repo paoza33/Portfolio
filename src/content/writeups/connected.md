@@ -2,8 +2,8 @@
 title: "Connected"
 date: 2026-06-07
 side: "red"
-tags: ["htb", "linux", "machine", "sqli", "rce", "cve"]
-summary: "Machine Linux. SQLi non authentifiée menant à une RCE, puis root via un déclencheur incron exécuté sur un chemin inscriptible."
+tags: ["htb", "linux", "machine", "sqli", "cve"]
+summary: "Machine Linux. Vulnérabilité web, puis root par abus d'un mécanisme privilégié mal sécurisé."
 draft: false
 ---
 
@@ -12,22 +12,16 @@ draft: false
 ## Résolue
 
 ![Machine Connected résolue](/images/connected.png)
-
 Machine Linux.
 
 ## Techniques mises en oeuvre
 
-- Reconnaissance, name-based virtual hosting détecté via le certificat TLS
-- Fingerprinting (logiciel de téléphonie et version)
-- RCE via une injection SQL non authentifiée (CVE)
-- Énumération locale automatisée et surveillance des processus root
-- Identification d'un déclencheur incron exécuté en root sur un chemin inscriptible
-- Root par injection de code chargé par le script root (bash SUID)
+- Énumération
+- Exploitation de CVE
+- Énumération locale
+- Root par abus d'une mauvaise configuration
 
 ## Outils utilisés
 
-- nmap
-- ffuf
-- Metasploit
-- pspy
-- LinPEAS
+- Outils d'énumération
+- Outils d'exploitation

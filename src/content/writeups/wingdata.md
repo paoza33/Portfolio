@@ -2,8 +2,8 @@
 title: "WingData"
 date: 2026-03-16
 side: "red"
-tags: ["htb", "linux", "machine", "rce", "cve", "hash-cracking"]
-summary: "Machine Linux. RCE pré-authentification sur un service proxifié, extraction et crack de hashes salés, puis root via une CVE d'extraction d'archive."
+tags: ["htb", "linux", "machine", "cve", "cracking"]
+summary: "Machine Linux. CVE sur un service, extraction et crack de hashes, puis root via mauvaise configuration."
 draft: false
 ---
 
@@ -12,23 +12,19 @@ draft: false
 ## Résolue
 
 ![Machine WingData résolue](/images/wingdata.png)
-
 Machine Linux.
 
 ## Techniques mises en oeuvre
 
-- Reconnaissance, identification d'une application proxifiée derrière le serveur web
-- RCE pré-authentification via une CVE (injection)
-- Énumération interne et extraction de fichiers de configuration
-- Extraction de hashes et découverte du sel utilisé
-- Crack de hashes salés (SHA256 avec sel)
+- Énumération
+- Exploitation de CVE
+- Énumération interne
+- obtention d'informations sensibles
 - Accès SSH
-- Root via une CVE d'extraction d'archive permettant une écriture arbitraire (abus de liens symboliques et physiques)
 
 ## Outils utilisés
 
-- nmap
-- ffuf
-- hashcat
+- Outils d'énumération
+- Outils d'exploitation
+- Outils de crackage
 - ssh
-- PoC public de la CVE

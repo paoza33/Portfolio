@@ -2,8 +2,8 @@
 title: "Reactor"
 date: 2026-05-25
 side: "red"
-tags: ["htb", "linux", "machine", "rce", "deserialization", "ssh-tunneling"]
-summary: "Machine Linux. RCE pré-authentification par désérialisation, exfiltration d'une base SQLite, crack de hash, puis root via abus d'un débogueur interne."
+tags: ["htb", "linux", "machine"]
+summary: "Machine Linux. service exposé vulnérable, exfiltration, crackage, puis root par abus d'une mauvaise configuration."
 draft: false
 ---
 
@@ -12,24 +12,20 @@ draft: false
 ## Résolue
 
 ![Machine Reactor résolue](/images/reactor.png)
-
 Machine Linux.
 
 ## Techniques mises en oeuvre
 
-- Reconnaissance, identification du framework web
-- RCE pré-authentification par désérialisation non sécurisée (CVE)
-- Exfiltration et lecture d'une base de données SQLite
-- Crack d'un hash MD5
+- Énumération
+- Exploitation de CVE
+- Crack de hash
 - Accès SSH
-- Découverte d'un débogueur interne par énumération des ports locaux
-- Redirection de port vers le débogueur
-- Root via abus du débogueur (exécution de code en contexte root)
+- Pivoting
+- Root via une mauvaise configuration
 
 ## Outils utilisés
 
-- nmap
-- hashcat
-- ssh (redirection de port)
-- Chromium DevTools
-- PoC public de la CVE
+- Outils d'énumération
+- Outils d'exploitation
+- Outils de crack de hash
+- ssh
