@@ -1,6 +1,6 @@
 ---
 title: "Trojan"
-date: 2023-05-30
+date: 2026-06-15
 side: "blue"
 tags: ["htb", "windows", "sherlock", "dfir", "memory-forensics", "malware-analysis"]
 summary: "Sherlock DFIR Windows : corrélation tri-sources (mémoire, disque, réseau) pour reconstituer l'infection d'un poste par un faux logiciel de récupération de données, jusqu'au déballage d'un installeur Inno Setup chiffré."
