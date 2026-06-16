@@ -26,7 +26,7 @@ John Grunewald supprimait d'anciens documents comptables lorsqu'il a effacé par
 
 ---
 
-## Task 1 — Build de l'OS
+## Task 1 - Build de l'OS
 
 > *What is the build version of the operating system?*
 
@@ -50,7 +50,7 @@ Ce build est aussi la base des versions suivantes (même socle, builds incrémen
 
 ---
 
-## Task 2 — Hostname
+## Task 2 - Hostname
 
 > *What is the computer hostname?*
 
@@ -90,11 +90,11 @@ REG_SZ  ...\ControlSet001\Control\ComputerName\ComputerName  ComputerName  DESKT
 
 ---
 
-## Task 3 — Nom du ZIP téléchargé
+## Task 3 - Nom du ZIP téléchargé
 
 > *What is the name of the downloaded ZIP file?*
 
-### Étape 1 — Localiser le fichier suspect (mémoire)
+### Étape 1 - Localiser le fichier suspect (mémoire)
 
 Le `filescan` révèle un fichier au nom évocateur dans `Downloads` :
 
@@ -113,7 +113,7 @@ HTB valide cette réponse, mais en contexte réel cela ne **prouve pas** le tél
 vol -q -f '.\memory capture\memory.vmem' windows.dumpfiles --virtaddr 0xb38177761640
 ```
 
-### Étape 2 — Vérifier l'exécution (mémoire)
+### Étape 2 - Vérifier l'exécution (mémoire)
 
 ```
 vol -q -f '.\memory capture\memory.vmem' windows.pstree | findstr /i "Recovery"
@@ -125,7 +125,7 @@ vol -q -f '.\memory capture\memory.vmem' windows.pstree | findstr /i "Recovery"
 
 Le `.exe` tourne depuis `\Downloads\Data_Recovery\` (donc extrait du zip). On a la preuve de l'exécution, mais pas celle du download : `pstree`/`cmdline` n'enregistrent pas l'origine réseau d'un fichier (sauf téléchargement en ligne de commande).
 
-### Étape 3 — Confirmer le download et sourcer l'URL (PCAP)
+### Étape 3 - Confirmer le download et sourcer l'URL (PCAP)
 
 ```
 http.request and http.request.uri contains "Data_Recovery"
@@ -169,7 +169,7 @@ Disque   : Data_Recovery.zip présent, taille identique (2 149 533) (corrélatio
 
 ---
 
-## Task 4 — Domaine de téléchargement (3e niveau inclus)
+## Task 4 - Domaine de téléchargement (3e niveau inclus)
 
 > *What is the domain of the website (including the third-level domain) from which the file was downloaded?*
 
@@ -184,7 +184,7 @@ Host: praetorial-gears.000webhostapp.com
 
 ---
 
-## Task 5 — PID du processus suspect
+## Task 5 - PID du processus suspect
 
 > *The user then executed the suspicious application found in the ZIP archive. What is the process PID?*
 
@@ -199,7 +199,7 @@ Le `pstree` (Task 3) montre l'exécution de l'installeur extrait du zip :
 
 ---
 
-## Task 6 — Chemin complet du processus suspect
+## Task 6 - Chemin complet du processus suspect
 
 > *What is the full path of the suspicious process?*
 
@@ -209,7 +209,7 @@ Donné directement par le `pstree` :
 
 ---
 
-## Task 7 — SHA-256 de l'exécutable suspect
+## Task 7 - SHA-256 de l'exécutable suspect
 
 > *What is the SHA-256 hash of the suspicious executable?*
 
@@ -227,7 +227,7 @@ FTK Imager affiche en natif le MD5 et le SHA-1 dans les propriétés du fichier,
 
 ---
 
-## Task 8 — Première exécution du programme malveillant
+## Task 8 - Première exécution du programme malveillant
 
 > *When was the malicious program first executed?*
 
@@ -252,7 +252,7 @@ Other run times: 2023-05-30 02:06:29
 
 ---
 
-## Task 9 — Nombre total d'exécutions
+## Task 9 - Nombre total d'exécutions
 
 > *How many times in total has the malicious application been executed?*
 
@@ -262,7 +262,7 @@ Donné par le parsing Prefetch de la Task 8 : `Run count: 2`.
 
 ---
 
-## Task 10 — Le second fichier .TMP référencé
+## Task 10 - Le second fichier .TMP référencé
 
 > *The malicious application references two .TMP files, one is IS-NJBAT.TMP, which is the other?*
 
@@ -279,7 +279,7 @@ Ce fichier ne ressort **pas** dans `windows.pstree` ni `windows.filescan` car il
 
 ---
 
-## Task 11 — URLs détectées comme malveillantes par VirusTotal
+## Task 11 - URLs détectées comme malveillantes par VirusTotal
 
 > *How many of the URLs contacted by the malicious application were detected as malicious by VirusTotal?*
 
@@ -289,7 +289,7 @@ Sur la page VirusTotal de l'échantillon (hash Task 7), onglet **Relations** →
 
 ---
 
-## Task 12 — Binaire téléchargé depuis le C2
+## Task 12 - Binaire téléchargé depuis le C2
 
 > *The malicious application downloaded a binary file from one of the C2 URLs, what is the name of the file?*
 
@@ -330,11 +330,11 @@ Le nom du fichier est donné par l'en-tête **`Content-Disposition`**, qui force
 
 ---
 
-## Task 13 — Nom et version réels du programme usurpé
+## Task 13 - Nom et version réels du programme usurpé
 
 > *Can you find any indication of the actual name and version of the program that the malware is pretending to be?*
 
-### Étape 1 — Identifier le type d'installeur (statique)
+### Étape 1 - Identifier le type d'installeur (statique)
 
 `Recovery_Setup.exe` est un installeur. On le déballe avec **innounp** (Inno Setup Unpacker), sans l'exécuter :
 
@@ -353,7 +353,7 @@ Inno Setup version detected:  5.1.2
 
 Le fichier `finalrecovery.chm` (non renommé) donne le **nom** du produit usurpé : **Final Recovery**. Les dates 2008-2010 confirment un vrai logiciel ancien réempaqueté.
 
-### Étape 2 — Le piège des métadonnées du script
+### Étape 2 - Le piège des métadonnées du script
 
 Le `install_script.iss` contient un `[Setup]` trompeur :
 
@@ -368,7 +368,7 @@ DefaultDirName={pf}\FLSCover\Rec528
 
 `AppName=Rec528` et `AppVerName=Cov 1.0.5.28` sont des **étiquettes d'obfuscation**, pas le vrai nom/version. La ligne `Encryption=yes` est la clé : les fichiers embarqués sont **chiffrés**. J'ai perdu beaucoup de temps à croire que la version était celle-ci, mais c'est avec ce que je montre ci-dessous que j'ai compris mon erreur.
 
-### Étape 3 — L'extraction statique bloquée
+### Étape 3 - L'extraction statique bloquée
 
 ```
 innounp.exe -x Recovery_Setup.exe
@@ -377,7 +377,7 @@ innounp.exe -x Recovery_Setup.exe
 
 Le chiffrement Inno Setup empêche de lire `Readme.txt`, `finalrecovery.chm` ou `Rec528.exe` statiquement. Le mot de passe n'est connu que du loader, fourni à l'exécution uniquement. C'est un **IOC** : l'attaquant chiffre l'installeur pour entraver l'analyse statique et l'AV.
 
-### Étape 4 — Déchiffrement par détonation contrôlée
+### Étape 4 - Déchiffrement par détonation contrôlée
 
 Le contenu n'étant accessible qu'à l'exécution, on détonne l'installeur dans un **lab isolé** :
 
@@ -398,7 +398,7 @@ dir "C:\Program Files (x86)\FLSCover\Rec528"
     data\
 ```
 
-### Étape 5 — Lecture de la version
+### Étape 5 - Lecture de la version
 
 Le `Readme.txt` déchiffré contient nom et version en clair :
 
@@ -418,7 +418,7 @@ La détonation n'a pas servi à observer un comportement, mais à **forcer un d�
 
 ---
 
-## Synthèse — chronologie de l'attaque
+## Synthèse - chronologie de l'attaque
 
 1. John supprime un document par erreur
 2. Recherche un outil de récupération → télécharge Data_Recovery.zip depuis praetorial-gears.000webhostapp.com (145.14.144.155)
