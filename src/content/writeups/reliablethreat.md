@@ -292,19 +292,4 @@ Exemple : `index.php?s1=whoami` exécute `whoami` sur le serveur. MITRE **T1505.
 
 **Registre**
 
-- `HKLM\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\shell\open\command` : COM hijack Corbeille
-
-**Acteur / signatures**
-
-- Publisher : `0xs1rx58d3v` / display name `0xS1rx58.D3V`
-- Email commits : `a.dev5520@s1r.org` (fuseau +0300)
-- Domaine : `s1rx.xyz`
-- Paramètre webshell : `s1`
-
-**MITRE ATT&CK**
-
-- T1036.005 : Masquerading: Match Legitimate Name (`RuntimeBroker.exe`)
-- T1059.001 : PowerShell
-- T1505.003 : Web Shell
-- T1546.015 : COM Hijacking
-- T1219 : Remote Access Software (ngrok tunnel)
+- `HKLM\SOFTWARE\Classes\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\shell\open\command` : COM hijack shell Corbeille
