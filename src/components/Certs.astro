@@ -1,40 +1,43 @@
 ---
 import { CERTIFS } from '../consts';
-
 const statutLabel: Record<string, string> = {
   'obtenu': 'obtenu',
   'en-cours': 'en cours',
   'planifie': 'a venir',
 };
 ---
-
 <section class="section certs" id="certifs">
   <div class="wrap">
     <div class="section-head reveal">
       <p class="kicker">// certifications</p>
       <h2>Parcours de certification</h2>
     </div>
-
     <div class="cert-grid">
-      {CERTIFS.map((c) => (
-        <div class={`cert cert-${c.statut}`}>
-          <div class="cert-top">
-            <span class="cert-sigle mono">{c.sigle}</span>
-            <span class={`cert-badge cert-badge-${c.statut} mono`}>{statutLabel[c.statut]}</span>
-          </div>
-          <p class="cert-nom muted">{c.nom}</p>
-          {c.note && <p class="cert-note faint mono">{c.note}</p>}
-        </div>
-      ))}
+      {CERTIFS.map((c) => {
+        const inner = (
+          <>
+            <div class="cert-top">
+              <span class="cert-sigle mono">{c.sigle}</span>
+              <span class={`cert-badge cert-badge-${c.statut} mono`}>{statutLabel[c.statut]}</span>
+            </div>
+            <p class="cert-nom muted">{c.nom}</p>
+            {c.note && <p class="cert-note faint mono">{c.note}</p>}
+            {c.preuve && <span class="cert-proof mono">voir la preuve ↗</span>}
+          </>
+        );
+        return c.preuve ? (
+          <a href={c.preuve} target="_blank" rel="noopener" class={`cert cert-${c.statut} cert-link`}>{inner}</a>
+        ) : (
+          <div class={`cert cert-${c.statut}`}>{inner}</div>
+        );
+      })}
     </div>
   </div>
 </section>
-
 <style>
   .certs { padding: 30px 0; }
   .section-head { margin-bottom: 22px; }
   .section-head h2 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); margin-top: 8px; }
-
   .cert-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -50,15 +53,16 @@ const statutLabel: Record<string, string> = {
   .cert-obtenu { border-color: var(--green); box-shadow: 0 0 22px -10px var(--green-glow); }
   .cert-en-cours { border-color: var(--border-strong); }
   .cert-planifie { opacity: 0.62; }
-
+  /* carte cliquable quand une preuve existe */
+  .cert-link { display: block; text-decoration: none; color: inherit; cursor: pointer; transition: transform 0.2s, box-shadow 0.25s, border-color 0.2s; }
+  .cert-link:hover { transform: translateY(-2px); box-shadow: 0 0 26px -8px var(--green-glow); }
+  .cert-proof { display: inline-block; margin-top: 12px; font-size: 11px; color: var(--green); letter-spacing: 0.04em; }
   .cert-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
   .cert-sigle { font-size: 1.25rem; font-weight: 600; color: var(--text); letter-spacing: 0.03em; }
-
   .cert-badge { font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; }
   .cert-badge-obtenu { background: var(--green); color: #04130a; }
   .cert-badge-en-cours { border: 1px solid var(--green); color: var(--green); }
   .cert-badge-planifie { border: 1px solid var(--text-faint); color: var(--text-faint); }
-
   .cert-nom { font-size: 0.88rem; margin-top: 12px; line-height: 1.5; }
   .cert-note { font-size: 11.5px; margin-top: 8px; }
 </style>

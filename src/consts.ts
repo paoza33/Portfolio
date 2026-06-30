@@ -44,6 +44,7 @@ export const CERTIFS = [
     sigle: 'CJCA',
     nom: 'Certified Junior Cybersecurity Associate (HTB)',
     statut: 'obtenu',
+    preuve: '/images/cjca.png',
   },
   {
     sigle: 'AIS',
