@@ -12,6 +12,8 @@ draft: false
 
 Projet support du titre Administrateur d'Infrastructures Sécurisées (AIS, RNCP 37680). L'objectif : concevoir et sécuriser de bout en bout l'infrastructure d'une clinique pluridisciplinaire fictive (Cleanic), de l'analyse de risque jusqu'à la supervision, en appliquant une démarche Secure by Design.
 
+Toute l'infrastructure a été implémentée sur GNS3.
+
 La clinique manipule des données de santé sensibles (dossiers patients, rendez-vous, prescriptions), ce qui place le RGPD et les recommandations de l'ANSSI au centre de chaque décision. Le dimensionnement reste celui d'une structure de taille moyenne : les choix doivent rester tenables pour une petite équipe IT.
 
 Contactez-moi pour obtenir le rapport complet du projet.
