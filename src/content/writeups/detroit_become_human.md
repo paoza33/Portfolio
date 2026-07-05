@@ -1,5 +1,5 @@
 ---
-title: "NOM_DU_SHERLOCK"
+title: "Detroit Become Human"
 date: 2026-07-04
 side: "blue"
 tags: ["htb", "windows", "sherlock", "dfir", "ntfs-forensics", "browser-forensics"]
