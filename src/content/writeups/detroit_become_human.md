@@ -1,9 +1,9 @@
 ---
 title: "NOM_DU_SHERLOCK"
-date: 2024-03-19
+date: 2026-07-04
 side: "blue"
 tags: ["htb", "windows", "sherlock", "dfir", "ntfs-forensics", "browser-forensics"]
-summary: "Sherlock DFIR Windows sur triage KAPE : reconstruction d'une chaîne d'infection par malvertising (faux " Google AI Gemini " via un post Facebook), de la vraie source du téléchargement jusqu'à l'extension de navigateur malveillante, avec démasquage du timestomping."
+summary: "Sherlock DFIR Windows sur triage KAPE : reconstruction d'une chaîne d'infection par malvertising (faux Google AI Gemini via un post Facebook), de la vraie source du téléchargement jusqu'à l'extension de navigateur malveillante, avec démasquage du timestomping."
 draft: false
 ---
 
