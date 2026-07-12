@@ -4,7 +4,7 @@ date: 2026-07-12
 side: "blue"
 tags: ["htb", "sherlock", "windows", "dfir", "malware"]
 summary: "Investigation DFIR d'un poste développeur compromis par un faux installeur OBS diffusé via une publicité Google. Reconstitution de la chaîne complète, du téléchargement piégé jusqu'au backdoor, sa persistance par tâche planifiée déguisée et son exfiltration vers un bucket S3."
-draft: true
+draft: false
 ---
 
 > Sherlock CDSA. Investigation à partir d'un triage d'artefacts Windows. Les questions sont conservées en anglais, comme dans l'énoncé original.
