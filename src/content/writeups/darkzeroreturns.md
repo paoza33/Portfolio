@@ -1,6 +1,6 @@
 ---
 title: "DarkZeroReturns"
-date: 2026-29-07
+date: 2026-07-29
 side: "red"
 tags: ["htb", "linux", "machine", "active-directory", "web"]
 summary: "Machine Linux jointe à un domaine Active Directory (difficile). Du foothold web à la compromission complète de l'environnement, via une chaîne Kerberos et un abus de CI/CD."
