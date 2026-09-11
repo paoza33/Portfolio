@@ -55,7 +55,8 @@ export const CERTIFS = [
   {
     sigle: 'CDSA',
     nom: 'Certified Defensive Security Analyst (HTB)',
-    statut: 'planifie',
+    statut: 'obtenu',
+    preuve: '/images/cdsa.png',
   },
   {
     sigle: 'CPTS',
