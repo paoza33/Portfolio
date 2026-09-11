@@ -50,7 +50,7 @@ export const CERTIFS = [
     sigle: 'AIS',
     nom: 'Administrateur d\'Infrastructures Securisees (RNCP 37680)',
     statut: 'obtenu',
-    note: '/images/AIS_screen.png',
+    preuve: '/images/AIS_screen.png',
   },
   {
     sigle: 'CDSA',
